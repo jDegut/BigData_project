@@ -1,7 +1,8 @@
 from fastapi import FastAPI
-from scripts.utils import predict, load_pipeline, get_data_from_json
 
-MODEL_FILENAME = "/artifacts/model.pickle"
+from scripts.utils import predict_x, load_pipeline, get_data_from_json
+
+MODEL_FILENAME = "/artifacts/pipeline.pkl"
 
 app = FastAPI()
 pipeline = load_pipeline(MODEL_FILENAME)
@@ -20,5 +21,5 @@ async def predict(data: dict):
     :return: predictions (JSON)
     """
     x = get_data_from_json(data)
-    y_pred = predict(pipeline, x)
+    y_pred = predict_x(pipeline, x)
     return {"predictions": y_pred.tolist()}

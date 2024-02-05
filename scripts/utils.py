@@ -12,8 +12,11 @@ def load_pipeline(filename: str):
     :param filename: as a string
     :return: pipeline
     """
-    with open(filename, 'rb') as f:
-        return pickle.load(f)
+    try:
+        with open(filename, 'rb') as f:
+            return pickle.load(f)
+    except FileNotFoundError:
+        raise FileNotFoundError(f"File not found: {filename}")
 
 
 def get_data_from_json(data: dict):
@@ -22,10 +25,11 @@ def get_data_from_json(data: dict):
     :param data:
     :return: data as a DataFrame
     """
+    print(pd.DataFrame(data, index=[0]))
     return pd.DataFrame(data, index=[0])
 
 
-def predict(model: Pipeline, x):
+def predict_x(model: Pipeline, x):
     """
     Predict the output of a model (pipeline).
     :param model: loaded pipeline

@@ -21,11 +21,8 @@ css = """
 st.markdown(css, unsafe_allow_html=True)
 st.title('Big Data API Deployment')
 
-if st.button('Try Me'):
-    st.write('UwOOF')
-
 # Endpoint
-API_URL = "http://localhost:8080"
+API_URL = "http://serving-api:8080"
 
 # Form
 with st.form("my_form"):
@@ -65,5 +62,5 @@ with st.form("my_form"):
         if response.status_code == 200:
             results = response.json()
             st.write(f"Predictions: {results['predictions']}")
-        else :
+        else:
             st.write(f"Error: {response.status_code}")
